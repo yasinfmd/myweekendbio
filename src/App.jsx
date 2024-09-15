@@ -260,9 +260,6 @@ function App() {
     useEffect(() => {
         if (ref.current) {
             init()
-            setTimeout(()=>{
-                moveToTechnologiesRoom()
-            },1000)
         }
     }, [ref])
     const handleClick=()=>{

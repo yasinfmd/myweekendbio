@@ -19,10 +19,12 @@ import { loadTexture } from "./LoadTexture.js";
 
 const createPicture = (pos,id,image) => {
     const pictureGeometry = new THREE.PlaneGeometry(1.8, 0.8);
+
     const pictureMaterial = new THREE.MeshBasicMaterial({
         map: new THREE.TextureLoader().load(image),
         side: THREE.DoubleSide
     });
+
 
     pictureMaterial.map.wrapS = THREE.RepeatWrapping;
     pictureMaterial.map.repeat.x = -1
