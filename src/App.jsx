@@ -49,13 +49,14 @@ function App() {
             gsap.to(controlsRef.current.target, {
                 duration: 2,
                 x: targetPosition.x,
-                y: targetPosition.y + 0.5,
+                y: targetPosition.y,
                 z: targetPosition.z,
                 ease: "power2.inOut",
                 onUpdate: function () {
                 },
                 onComplete: function () {
                     cameraRef.current.updateProjectionMatrix();
+                    cameraRef.current.lookAt(targetPosition);
 
                 },
             });
