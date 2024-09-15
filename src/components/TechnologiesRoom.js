@@ -28,7 +28,6 @@ const createPicture = (pos,id,image) => {
 
     pictureMaterial.map.wrapS = THREE.RepeatWrapping;
     pictureMaterial.map.repeat.x = -1
-    pictureMaterial.map.needsUpdate = true;
 
     const picture = new THREE.Mesh(pictureGeometry, pictureMaterial);
     picture.position.set(pos.x,pos.y,pos.z);

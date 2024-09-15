@@ -25,8 +25,6 @@ function App() {
     let cameraRef = useRef()
     let rendererRef = useRef()
     let controlsRef = useRef()
-    const [loadedCount, setLoadedCount] = useState(0);
-    const totalAssets = 6;
     const [isLoadingComplete, setIsLoadingComplete] = useState(false);
     const [key, setKey] = useState(0);
 
@@ -122,7 +120,6 @@ function App() {
         rendererRef.current.setSize(window.innerWidth, window.innerHeight)
     }
     const setRendererConfig = () => {
-        rendererRef.current.outputEncoding = THREE.sRGBEncoding;
     }
     const createRenderer = () => {
         rendererRef.current = new THREE.WebGLRenderer({canvas: ref.current});
@@ -133,7 +130,7 @@ function App() {
         loadSnowMan()
             .then((snowman) => {
                 sceneRef.current.add(snowman);
-                incrementLoadedCount();
+
 
             })
             .catch((error) => {
@@ -147,7 +144,7 @@ function App() {
             .then(({scene, animationMixer}) => {
                 mixer = animationMixer
                 sceneRef.current.add(scene);
-                incrementLoadedCount();
+
 
             })
             .catch((error) => {
@@ -193,7 +190,7 @@ function App() {
         socialRoomGroupRef = aboutRoom(sceneRef.current, cameraRef.current, controlsRef.current, rendererRef.current);
         socialRoomGroupRef.position.set(-20, 0, -36)
         sceneRef.current.add(socialRoomGroupRef);
-        incrementLoadedCount();
+
 
 
     };
@@ -202,33 +199,18 @@ function App() {
         technologiesRoomGroupRef = technologiesRoom(sceneRef.current, cameraRef.current, controlsRef.current, rendererRef.current);
         technologiesRoomGroupRef.position.set(40, 0, -36)
         sceneRef.current.add(technologiesRoomGroupRef);
-        incrementLoadedCount();
 
 
     };
 
-    const incrementLoadedCount = () => {
-        setLoadedCount(prev => {
-            const newCount = prev + 1;
-            return newCount;
-        });
-    };
-    const checkIfLoadingComplete = () => {
-        if (loadedCount === totalAssets) {
-            setTimeout(()=>{
-                setIsLoadingComplete(true);
-            },5000)
-        }
-    };
+
+
 
     const createController = () => {
         controlsRef.current = controller(cameraRef, ref)
-        incrementLoadedCount();
 
     }
-    useEffect(() => {
-        checkIfLoadingComplete();
-    }, [loadedCount]);
+
     const init = () => {
         createScene()
         createLights()
@@ -247,6 +229,9 @@ function App() {
         createComputer()
         createController()
         render()
+        setTimeout(()=>{
+            setIsLoadingComplete(true);
+        },1000*10)
 
     }
 
@@ -280,6 +265,7 @@ function App() {
             moveToInitial()
         }
     }
+
     return (
         <>
 
